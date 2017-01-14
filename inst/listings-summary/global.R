@@ -4,9 +4,9 @@ library(ESAListings)
 library(highcharter)
 library(leaflet)
 library(plotly)
-library(treemap)
 library(shinyBS)
 library(shinydashboard)
+library(treemap)
 library(viridis)
 
 data("county_topo")
@@ -24,7 +24,7 @@ num_cn <- nrow(filter(TECP_domestic, Federal_Listing_Status == "Candidate"))
 
 
 #create 'counties' dataset
-counties<-group_by(esacounties, GEOID)%>%
+counties <- group_by(esacounties, GEOID) %>%
   summarise(count = n())
 
 #counties$Species <- sapply(counties$GEOID, function(x,y) y$Scientific[y$GEOID == x], y = esacounties)
