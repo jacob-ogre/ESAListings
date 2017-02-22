@@ -13,19 +13,20 @@ library(viridis)
 
 data("county_topo")
 data("esacounties")
-data("TECP_date")
-data("TECP_domestic")
+# data("TECP_date")
+# data("TECP_domestic")
+load("/home/jacobmalcom/Data/ESA_listings/TECP_data.rda")
 data("county_attrib")
 
 #pull summaries of listings for boxes
-num_es <-
-  nrow(filter(TECP_domestic, Federal_Listing_Status == "Endangered"))
-num_th <-
-  nrow(filter(TECP_domestic, Federal_Listing_Status == "Threatened"))
-num_pr <- nrow(filter(
+num_es <- nrow(filter(TECP_domestic, Federal_Listing_Status == "Endangered"))
+num_th <- nrow(filter(TECP_domestic, Federal_Listing_Status == "Threatened"))
+num_pr <- nrow(
+  filter(
     TECP_domestic,
     startsWith(Federal_Listing_Status, "Proposed")
-  ))
+  )
+)
 num_cn <- nrow(filter(TECP_domestic, Federal_Listing_Status == "Candidate"))
 
 #create 'counties' dataset
@@ -67,8 +68,7 @@ regions$Group <- sapply(regions$Species_Group, function(x)
 regions$Status <- sapply(regions$Federal_Listing_Status, function(x)
   if (x == "Proposed Endangered" | x == "Proposed Threatened") {
     "Proposed"
-  }
-  else{
+  } else{
     x
   })
 
